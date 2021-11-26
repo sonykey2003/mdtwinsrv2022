@@ -37,7 +37,7 @@ variable "autounattend" {
   
   variable "iso_checksum" {
     type    = string
-    default = "sha256:026607e7aa7ff80441045d8830556bf8899062ca9b3c543702f112dd6ffe6078"
+    default = "sha256:4f1457c4fe14ce48c9b2324924f33ca4f0470475e6da851b39ccbf98f44e7852"
   }
   
   variable "iso_url" {
