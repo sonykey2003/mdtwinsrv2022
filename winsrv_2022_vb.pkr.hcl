@@ -97,7 +97,7 @@ variable "autounattend" {
       "./scripts/enable-winrm.ps1"
     ]
     guest_additions_mode = "disable"
-    guest_os_type        = "windows9srv-64"
+    guest_os_type        = "Windows2016_64"
     headless             = "${var.headless}"
     iso_checksum         = "${var.iso_checksum}"
     iso_url              = "${var.iso_url}"
