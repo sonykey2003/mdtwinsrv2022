@@ -67,7 +67,7 @@ variable "autounattend" {
   
   variable "vm_name" {
     type    = string
-    default = "windows_10"
+    default = "winsrv_2022"
   }
   
   variable "vmx_version" {
