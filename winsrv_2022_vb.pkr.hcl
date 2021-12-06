@@ -80,6 +80,11 @@ variable "autounattend" {
     default = "40m"
   }
   
+  variable "boot_wait" {
+    type  = string
+    default = "6m"
+  }
+  
   # source blocks are generated from your builders; a source can be referenced in
   # build blocks. A build block runs provisioner and post-processors on a
   # source. Read the documentation for source blocks here:
@@ -87,13 +92,12 @@ variable "autounattend" {
   
   source "virtualbox-iso" "main" {
     #boot_command         = ""
-    boot_wait            = "6m"
+    boot_wait            = "${var.boot_wait}"
     communicator         = "winrm"
     cpus                 = 2
     disk_size            = "${var.disk_size}"
     floppy_files         = [
       "${var.autounattend}",
-      "./scripts/fixnetwork.ps1",
       "./scripts/enable-winrm.ps1"
     ]
     guest_additions_mode = "disable"
