@@ -18,7 +18,7 @@
   shasum -a 256 <your-iso-path>
   ```
   * Replace the value in .pkr.hcl file
-  ```json
+  ```
    variable "iso_checksum" {
         type    = string
         default = "sha256:<your-iso-checksum>"
