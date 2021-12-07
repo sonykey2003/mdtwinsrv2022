@@ -11,6 +11,19 @@
 
 
 ## Usage
+* Download the ISO from your trusted source, in my case, I use the [eva image](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022) for testing purpose.
+* Obtain the Checksum of the ISO via:
+  * In Mac terminal
+  ```sh
+  shasum -a 256 <your-iso-path>
+  ```
+  * Replace the value in .pkr.hcl file
+  ```json
+   variable "iso_checksum" {
+        type    = string
+        default = "sha256:<your-iso-checksum>"
+    }
+```
 
 * Run the line below to build the box (for virtualbox only)
 ```sh
