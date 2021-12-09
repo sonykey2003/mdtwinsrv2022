@@ -43,7 +43,7 @@ agrant box add winsvr_2022.box
 Vagrant up && Vagrant rdp
 ```
 
-# Install and confg the MDT on Win Server 2022
+# Spin up a Winsrv 2022 with MDT enabled from Vagrant
 
 ## Caveats
 * Validate the Vagrant provisioning of [prep-mdt.ps1]() via:

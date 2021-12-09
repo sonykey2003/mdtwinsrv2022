@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
     config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
 
     #Map a folder from Mac via SMB (no better choice between MacOS and Windows)
-    config.vm.synced_folder "/Users/shuyisong/Repo/iso", "/iso", type: "smb", smb_username: "shuyisong"
+    config.vm.synced_folder "<iso-path>", "/iso", type: "smb", smb_username: "<your_mac_username>"
 
     config.vm.provision "shell", privileged: "true", path: "./scripts/prep-mdt.ps1"
 
