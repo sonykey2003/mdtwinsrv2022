@@ -4,8 +4,8 @@
 > It's a striped fork from [StefanScherer's GitHub repository](https://github.com/jeffskinnerbox/Windows-10-Vagrant-Box), you can find more useful windows resources there. 
 
 ## System Requirements
-* MacOS 12 Monterey or BigSur (Not tested on other lower version)
-* Virtualbox 6.1.30 (for Monterey at least) 
+* MacOS 12 Monterey or BigSur (Not tested on the lower versions).
+* Virtualbox 6.1.30 (for Monterey at least).
 * Packer 1.7.0 +
 * [MSFT RDP for Mac](https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12)
 
