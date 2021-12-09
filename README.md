@@ -42,3 +42,24 @@ agrant box add winsvr_2022.box
 ```sh
 Vagrant up && Vagrant rdp
 ```
+
+# Install and confg the MDT on Win Server 2022
+
+## Caveats
+* Validate the Vagrant provisioning of [prep-mdt.ps1]() via:
+  * List of available MDT cmdlets [here](https://techdirectarchive.com/2021/02/05/how-to-install-mdt-powershell-module/).
+  * More MSFT [reference](https://docs.microsoft.com/en-us/mem/configmgr/mdt/samples-guide). 
+* Configure the MDT server via WDS console. 
+* I'm using SMB to map the host (MacOS) folder as it's the by far only technically viable way. Remember to key in your Mac user's password when prompted:
+
+ ```shell
+ Win Svr 2022 Base Box: folders shortly. Please use the proper username/password of your
+    Win Svr 2022 Base Box: account.
+    Win Svr 2022 Base Box:  
+    Win Svr 2022 Base Box: Username (<your_mac_username>): 
+    Win Svr 2022 Base Box: Password (will be hidden): 
+```
+* Modify this line for your own folder mapping:
+```ruby
+config.vm.synced_folder "<iso-path>", "/iso", type: "smb", smb_username: "<your_mac_username>"
+```
