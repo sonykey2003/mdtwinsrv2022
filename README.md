@@ -46,7 +46,7 @@ Vagrant up && Vagrant rdp
 # Spin up a Winsrv 2022 with MDT enabled from Vagrant
 
 ## Caveats
-* Validate the Vagrant provisioning of [prep-mdt.ps1]() via:
+* Validate the Vagrant provisioning of [prep-mdt.ps1](https://github.com/sonykey2003/mdtwinsrv2022/blob/master/scripts/prep-mdt.ps1) via:
   * List of available MDT cmdlets [here](https://techdirectarchive.com/2021/02/05/how-to-install-mdt-powershell-module/).
   * More MSFT [reference](https://docs.microsoft.com/en-us/mem/configmgr/mdt/samples-guide). 
 * Configure the MDT server via WDS console. 
