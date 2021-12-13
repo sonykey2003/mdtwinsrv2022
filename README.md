@@ -7,6 +7,7 @@
 * MacOS 12 Monterey or BigSur (Not tested on the lower versions).
 * Virtualbox 6.1.30 (for Monterey at least).
 * Packer 1.7.0 +
+* Vagrant 2.2.17 +
 * [MSFT RDP for Mac](https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12)
 
 
@@ -18,13 +19,12 @@
   shasum -a 256 <your-iso-path>
   ```
   * Replace the value in .pkr.hcl file
-  ```
+  ```hcl
    variable "iso_checksum" {
         type    = string
         default = "sha256:<your-iso-checksum>"
     }
-```
-
+  ```
 * Run the line below to build the box (for virtualbox only)
 ```sh
 packer build --var 'iso_url=<your-iso-path>' ./winsrv_2022_vb.pkr.hcl
