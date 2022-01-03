@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell", privileged: "true", path: "./scripts/prep-mdt.ps1"
 
 
-    config.vm.provider :virtualbox do |v, override|
+    config.vm.provider :virtualbox do |v, override|     
         #v.gui = true
         v.memory = 4096
         v.cpus = 2
