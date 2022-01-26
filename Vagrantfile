@@ -5,7 +5,7 @@ Vagrant.require_version ">= 1.6.2"
 
 Vagrant.configure("2") do |config|
     config.vm.define "Win Svr 2022 Base Box"
-    config.vm.box = "winsrv_2022"
+    config.vm.box = "sonykey2003/winsrv2022"
     config.vm.communicator = "winrm"
 
     # Admin user name and password
@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
 
     #Map a folder from Mac via SMB (no better choice between MacOS and Windows)
     config.vm.synced_folder "<iso-path>", "/iso", type: "smb", smb_username: "<your_mac_username>"
-    
+
     config.vm.provision "shell", privileged: "true", path: "./scripts/prep-mdt.ps1"
 
 
