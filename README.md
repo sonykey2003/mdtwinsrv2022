@@ -3,11 +3,11 @@
 > **_NOTE_**  
 > This repo is inspired and initially forked from [StefanScherer's GitHub repository](https://github.com/jeffskinnerbox/Windows-10-Vagrant-Box), you can find more useful windows resources there. 
 
-## Part 1: Build a vanila WinSrv 2022 Vagrant Box
+### Part 1: Build a vanila WinSrv 2022 Vagrant Box
 ### TL;DR
 You can skip this part by using [my box](https://app.vagrantup.com/sonykey2003/boxes/winsrv2022) on Vagrant Cloud.
 
-## System Requirements
+### System Requirements
 * MacOS 12 Monterey or BigSur (Not tested on the lower versions).
 * Virtualbox 6.1.30 (for Monterey at least).
 * Packer 1.7.0 +
@@ -15,7 +15,7 @@ You can skip this part by using [my box](https://app.vagrantup.com/sonykey2003/b
 * [MSFT RDP for Mac](https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12)
 
 
-## Usage
+### Usage
 * Download the ISO from your trusted source, in my case, I use the [eva image](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022) for testing purpose.
 * Obtain the Checksum of the ISO via:
   * In Mac terminal
@@ -45,7 +45,7 @@ vagrant box add winsvr_2022.box
 
 # Part 2: Auto-provision a ready-to-use MDT workbench from scratch
 
-## Caveats
+### Caveats
 * Modify this line for your own folder mapping:
 ```ruby
 config.vm.synced_folder "<iso-path>", "/iso", type: "smb", smb_username: "<your_mac_username>"
@@ -75,7 +75,7 @@ Vagrant up && Vagrant rdp
 ### [Updates - 28 Jan 2022] 
 In this new update, you will be able to produce an MDT customised ISO from scratch - Automatically! Just do a "Vagrant up", grab a coffee, sit-back and relax. 
 
-## Prerequisite
+### Prerequisite
 * Create a folder to host the ISOs on Mac and:
   * [ts.xml](https://systemscenter.ru/mdt2012.en/tsxml.htm) - your own Task Sequence template.
   * [CustomSettings.ini & Bootstrap.ini](https://win10.guru/windows-deployment-with-mdt-part-3-customize-deployment/) - Customised task sequence settings. 
