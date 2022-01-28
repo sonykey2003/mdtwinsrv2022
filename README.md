@@ -1,7 +1,11 @@
-# Build a Windows Server 2022 Vagrant box with Packer
+# Automating Windows MDT End-to-end
 
 > **_NOTE_**  
-> It's a striped fork from [StefanScherer's GitHub repository](https://github.com/jeffskinnerbox/Windows-10-Vagrant-Box), you can find more useful windows resources there. 
+> This repo is inspired and initially forked from [StefanScherer's GitHub repository](https://github.com/jeffskinnerbox/Windows-10-Vagrant-Box), you can find more useful windows resources there. 
+
+## Part 1: Build a vanila WinSrv 2022 Vagrant Box
+### TL;DR
+You can skip this part by using [my box](https://app.vagrantup.com/sonykey2003/boxes/winsrv2022) on Vagrant Cloud.
 
 ## System Requirements
 * MacOS 12 Monterey or BigSur (Not tested on the lower versions).
@@ -29,30 +33,25 @@
 ```sh
 packer build --var 'iso_url=<your-iso-path>' ./winsrv_2022_vb.pkr.hcl
 ```
-* Once the box create, covert a Vagrantfile from the Packer template.
+* Once the box is created, covert a Vagrantfile from the Packer template.
 ```sh
 cp ./mdtwinsrv2022/vagrantfile-winsrv_2022.template Vagrantfile
 ```
 
 * Add the box to Vagrant
 ```sh
-agrant box add winsvr_2022.box
-```
-* Firing up and enjoy!
-```sh
-Vagrant up && Vagrant rdp
+vagrant box add winsvr_2022.box
 ```
 
-# Spin up a Winsrv 2022 with MDT enabled from Vagrant
+# Part 2: Auto-provision a ready-to-use MDT workbench from scratch
 
 ## Caveats
-* Validate the Vagrant provisioning of [prep-mdt.ps1](https://github.com/sonykey2003/mdtwinsrv2022/blob/master/scripts/prep-mdt.ps1) via:
-  * List of available MDT cmdlets [here](https://techdirectarchive.com/2021/02/05/how-to-install-mdt-powershell-module/).
-  * More MSFT [reference](https://docs.microsoft.com/en-us/mem/configmgr/mdt/samples-guide). 
-* Configure the MDT server via WDS console. 
-* I'm using SMB to map the host (MacOS) folder as it's the by far only technically viable way. [More Options](https://www.vagrantup.com/docs/synced-folders/basic_usage).
+* Modify this line for your own folder mapping:
+```ruby
+config.vm.synced_folder "<iso-path>", "/iso", type: "smb", smb_username: "<your_mac_username>"
+```
+  ***Note:*** the reason why I'm using SMB to map the host (MacOS) folder by knowing most of the folks hate it -- Unfortunately, it's the by far only technically viable way on Vagrant. [More Options](https://www.vagrantup.com/docs/synced-folders/basic_usage).
 * Key in your Mac user's password when prompted:
-
  ```shell
  Win Svr 2022 Base Box: folders shortly. Please use the proper username/password of your
     Win Svr 2022 Base Box: account.
@@ -60,7 +59,45 @@ Vagrant up && Vagrant rdp
     Win Svr 2022 Base Box: Username (<your_mac_username>): 
     Win Svr 2022 Base Box: Password (will be hidden): 
 ```
-* Modify this line for your own folder mapping:
-```ruby
-config.vm.synced_folder "<iso-path>", "/iso", type: "smb", smb_username: "<your_mac_username>"
+* Observe and validate the Vagrant provisioning script [prep-mdt.ps1](https://github.com/sonykey2003/mdtwinsrv2022/blob/master/scripts/prep-mdt.ps1) by:
+  * Try the cmds from the list of available MDT cmdlets [here](https://techdirectarchive.com/2021/02/05/how-to-install-mdt-powershell-module/).
+  * More MSFT [reference](https://docs.microsoft.com/en-us/mem/configmgr/mdt/samples-guide). 
+* Customise your MDT settings via the [workbench](https://docs.microsoft.com/en-us/windows/deployment/deploy-windows-mdt/get-started-with-the-microsoft-deployment-toolkit). 
+
+
+
+* Fire it up and enjoy!
+```sh
+Vagrant up && Vagrant rdp
 ```
+
+#  Part 3: Auto-produce a customised Win10/11 ISO
+### [Updates - 28 Jan 2022] 
+In this new update, you will be able to produce an MDT customised ISO from scratch - Automatically! Just do a "Vagrant up", grab a coffee, sit-back and relax. 
+
+## Prerequisite
+* Create a folder to host the ISOs on Mac and:
+  * [ts.xml](https://systemscenter.ru/mdt2012.en/tsxml.htm) - your own Task Sequence template.
+  * [CustomSettings.ini & Bootstrap.ini](https://win10.guru/windows-deployment-with-mdt-part-3-customize-deployment/) - Customised task sequence settings. 
+* Recommended folder structure for "iso:\\":
+```
+iso
+├── bin
+│   ├── Bootstrap.ini
+│   ├── CustomSettings.ini
+│   ├── Settings.xml
+│   ├── Unattend.xml
+│   └── ts.xml
+├── out_Win10_eva.iso #(will be created later)
+├── win10_ent.iso
+└── win11_ent.iso
+```
+* Fill the "iso" path and your Mac login user name in Vagrantfile in line:
+```
+config.vm.synced_folder "<iso-path>", "/iso", type: "smb", mb_username: "<your_mac_username>"
+```
+* Fire it up!
+```
+Vagrant up 
+```
+* Make sure "out_Win10_eva.iso" had landed, give it a go with Virtualbox or the real box. 

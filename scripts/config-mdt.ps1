@@ -8,7 +8,7 @@
   $OfflineMediaRoot = "$HOME\Desktop"
   $OfflineConfigRoot = "$HOME\Desktop\Content\Deploy"
   $OfflineMediaName = "MEDIA001"
-  $OutISO = "shawn_Win10_eva.iso"
+  $OutISO = "Out_Win10_eva.iso"
   
   Write-Host "Configuring MDT..."
   
