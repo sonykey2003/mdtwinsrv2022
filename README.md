@@ -3,7 +3,7 @@
 > **_NOTE_**  
 > This repo is inspired and initially forked from [StefanScherer's GitHub repository](https://github.com/jeffskinnerbox/Windows-10-Vagrant-Box), you can find more useful windows resources there. 
 
-### Part 1: Build a vanila WinSrv 2022 Vagrant Box
+## Part 1: Build a vanila WinSrv 2022 Vagrant Box
 ### TL;DR
 You can skip this part by using [my box](https://app.vagrantup.com/sonykey2003/boxes/winsrv2022) on Vagrant Cloud.
 
@@ -43,7 +43,7 @@ cp ./mdtwinsrv2022/vagrantfile-winsrv_2022.template Vagrantfile
 vagrant box add winsvr_2022.box
 ```
 
-# Part 2: Auto-provision a ready-to-use MDT workbench from scratch
+## Part 2: Auto-provision a ready-to-use MDT workbench from scratch
 
 ### Caveats
 * Modify this line for your own folder mapping:
@@ -71,7 +71,7 @@ config.vm.synced_folder "<iso-path>", "/iso", type: "smb", smb_username: "<your_
 Vagrant up && Vagrant rdp
 ```
 
-#  Part 3: Auto-produce a customised Win10/11 ISO
+##  Part 3: Auto-produce a customised Win10/11 ISO
 ### [Updates - 28 Jan 2022] 
 In this new update, you will be able to produce an MDT customised ISO from scratch - Automatically! Just do a "Vagrant up", grab a coffee, sit-back and relax. 
 
