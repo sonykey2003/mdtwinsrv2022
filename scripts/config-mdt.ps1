@@ -38,7 +38,7 @@
   
   ### Step 2: Force importing the latest version of task sequence tamplate
   $TSName = "test"
-  Remove-Item -Force ($MDTSharePath + 'Task Sequences\' + "test") -ErrorAction SilentlyContinue -Verbose
+  Remove-Item -Force ($MDTSharePath + 'Task Sequences\' + $TSName) -ErrorAction SilentlyContinue -Verbose
   
   Write-Host "Importing customised Task Sequence..."
   import-mdttasksequence -path ($MDTSharePath + 'Task Sequences') `

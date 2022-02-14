@@ -26,7 +26,7 @@ Write-Host "installing PE.exe..."
 if (!(Test-Path $winpe)){
     curl -Uri "https://go.microsoft.com/fwlink/?linkid=2087112" -OutFile C:\tmp\pe.exe
     .\pe.exe /features + /q  
-    sleep 20
+    sleep 90
 }
 else {
     Write-Host "Skipping..PE installed!"
@@ -39,7 +39,7 @@ Write-Host "installing mdt workbench..."
 if (!(test-path $mdtwb)) {
     curl -Uri "https://download.microsoft.com/download/3/3/9/339BE62D-B4B8-4956-B58D-73C4685FC492/MicrosoftDeploymentToolkit_x64.msi" -outfile c:\tmp\mdt64.msi
     .\mdt64.msi /quiet
-    sleep 60
+    sleep 30
 }
 else {
     Write-Host "Skipping..MDT Workbench installed!"
@@ -67,7 +67,7 @@ if (!(Test-Path $pwsh7)){
     Write-Host "installing pwsh 7..."
     curl -Uri https://github.com/PowerShell/PowerShell/releases/download/v7.2.1/PowerShell-7.2.1-win-x64.msi -outfile c:\tmp\ps7.msi
     .\ps7.msi /quiet
-    sleep 60
+    #sleep 60
 }
 
 Write-Host "Done with MDT setup..."
