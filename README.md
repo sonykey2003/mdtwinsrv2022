@@ -48,7 +48,7 @@ vagrant box add winsvr_2022.box
 ### Caveats
 * Modify this line for your own folder mapping:
 ```ruby
-config.vm.synced_folder "<iso-path>", "/iso", type: "smb", smb_username: "<your_mac_username>"
+config.vm.synced_folder "<iso-path>", "/mdt", type: "smb", smb_username: "<your_mac_username>"
 ```
   ***Note:*** the reason why I'm using SMB to map the host (MacOS) folder by knowing most of the folks hate it -- Unfortunately, it's the by far only technically viable way on Vagrant. [More Options](https://www.vagrantup.com/docs/synced-folders/basic_usage).
 * Key in your Mac user's password when prompted:
@@ -79,22 +79,10 @@ In this new update, you will be able to produce an MDT customised ISO from scrat
 * Create a folder to host the ISOs on Mac and:
   * [ts.xml](https://systemscenter.ru/mdt2012.en/tsxml.htm) - your own Task Sequence template.
   * [CustomSettings.ini & Bootstrap.ini](https://win10.guru/windows-deployment-with-mdt-part-3-customize-deployment/) - Customised task sequence settings. 
-* Recommended folder structure for "iso:\\":
-```
-iso
-├── bin
-│   ├── Bootstrap.ini
-│   ├── CustomSettings.ini
-│   ├── Settings.xml
-│   ├── Unattend.xml
-│   └── ts.xml
-├── out_Win10_eva.iso #(will be created later)
-├── win10_ent.iso
-└── win11_ent.iso
-```
+
 * Fill the "iso" path and your Mac login user name in Vagrantfile in line:
 ```
-config.vm.synced_folder "<iso-path>", "/iso", type: "smb", mb_username: "<your_mac_username>"
+config.vm.synced_folder "<iso-path>", "/mdt", type: "smb", mb_username: "<your_mac_username>"
 ```
 * Fire it up!
 ```

@@ -18,10 +18,11 @@ Vagrant.configure("2") do |config|
     config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
 
     #Map a folder from Mac via SMB (no better choice between MacOS and Windows)
-    config.vm.synced_folder "/Users/shawnsong/iso", "/iso", type: "smb", smb_username: "shawnsong"
+    config.vm.synced_folder "<your-iso-folder>", "/mdt", type: "smb", smb_username: "<your_mac_username>" #for ISOs
+    config.vm.synced_folder "./bin", "/bin", type: "smb", smb_username: "<your_mac_username>" #for the bin files
 
     config.vm.provision "shell", privileged: "true", path: "./scripts/prep-mdt.ps1"
-
+    config.vm.provision "shell", privileged: "true", path: "./scripts/config-mdt.ps1"
 
     config.vm.provider :virtualbox do |v, override|     
         #v.gui = true
