@@ -45,12 +45,16 @@ vagrant box add winsvr_2022.box
 
 ## Part 2: Auto-provision a ready-to-use MDT workbench from scratch
 
-### Caveats
+### Prerequisite
+* Create a folder to host the ISOs on Mac.
+* Customise your own Task Sequence and the options in CustomSettings.ini & Bootstrap.ini. (will be documentated in the section later of the current state)
+  * [ts.xml](https://systemscenter.ru/mdt2012.en/tsxml.htm) - your own Task Sequence template.
+  * [CustomSettings.ini & Bootstrap.ini](https://win10.guru/windows-deployment-with-mdt-part-3-customize-deployment/) - Customised task sequence settings. 
 * Modify this line for your own folder mapping:
 ```ruby
-config.vm.synced_folder "<iso-path>", "/mdt", type: "smb", smb_username: "<your_mac_username>"
+config.vm.synced_folder "<your-iso-folder>", "/mdt", type: "smb", smb_username: "<your_mac_username>"
 ```
-  ***Note:*** the reason why I'm using SMB to map the host (MacOS) folder by knowing most of the folks hate it -- Unfortunately, it's the by far only technically viable way on Vagrant. [More Options](https://www.vagrantup.com/docs/synced-folders/basic_usage).
+  ***Note:*** The reason why I'm using SMB to map the host (MacOS) folder by acknowledging most of the us hate it -- Unfortunately, it's the only technically viable way (for now) works on Vagrant without the need of 3rd party plugins like [Virtualbox Guest Addition](https://docs.oracle.com/cd/E36500_01/E36502/html/qs-guest-additions.html). Feel free to checkout the other folder syncing [options](https://www.vagrantup.com/docs/synced-folders/basic_usage).
 * Key in your Mac user's password when prompted:
  ```shell
  Win Svr 2022 Base Box: folders shortly. Please use the proper username/password of your
@@ -75,10 +79,7 @@ Vagrant up && Vagrant rdp
 ### [Updates - 28 Jan 2022] 
 In this new update, you will be able to produce an MDT customised ISO from scratch - Automatically! Just do a "Vagrant up", grab a coffee, sit-back and relax. 
 
-### Prerequisite
-* Create a folder to host the ISOs on Mac and:
-  * [ts.xml](https://systemscenter.ru/mdt2012.en/tsxml.htm) - your own Task Sequence template.
-  * [CustomSettings.ini & Bootstrap.ini](https://win10.guru/windows-deployment-with-mdt-part-3-customize-deployment/) - Customised task sequence settings. 
+
 
 * Fill the "iso" path and your Mac login user name in Vagrantfile in line:
 ```
