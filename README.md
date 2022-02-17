@@ -47,9 +47,6 @@ vagrant box add winsvr_2022.box
 
 ### Prerequisite
 * Create a folder to host the ISOs on Mac.
-* Customise your own Task Sequence and the options in CustomSettings.ini & Bootstrap.ini. (will be documentated in the section later of the current state)
-  * [ts.xml](https://systemscenter.ru/mdt2012.en/tsxml.htm) - your own Task Sequence template.
-  * [CustomSettings.ini & Bootstrap.ini](https://win10.guru/windows-deployment-with-mdt-part-3-customize-deployment/) - Customised task sequence settings. 
 * Modify this line for your own folder mapping:
 ```ruby
 config.vm.synced_folder "<your-iso-folder>", "/mdt", type: "smb", smb_username: "<your_mac_username>"
@@ -79,14 +76,20 @@ Vagrant up && Vagrant rdp
 ### [Updates - 28 Jan 2022] 
 In this new update, you will be able to produce an MDT customised ISO from scratch - Automatically! Just do a "Vagrant up", grab a coffee, sit-back and relax. 
 
-
+The ISO I'm creating here - Vanila, zero clicks, and clean.
 
 * Fill the "iso" path and your Mac login user name in Vagrantfile in line:
+```ruby
+config.vm.synced_folder "<your-iso-folder>", "/mdt", type: "smb", smb_username:"<your_mac_username>" 
+config.vm.synced_folder "./bin", "/bin", type: "smb", smb_username: "<your_mac_username>" 
 ```
-config.vm.synced_folder "<iso-path>", "/mdt", type: "smb", mb_username: "<your_mac_username>"
-```
+
+* Customise your own Task Sequence and the options in CustomSettings.ini & Bootstrap.ini. In my case:
+  * [ts.xml](https://systemscenter.ru/mdt2012.en/tsxml.htm) - A vanila template will only wipe the disk and install the OS.
+  * [CustomSettings.ini & Bootstrap.ini](https://win10.guru/windows-deployment-with-mdt-part-3-customize-deployment/) - A customised task sequence setting template by suppressing the clicks, only displays a final summary page once it's done . 
+
 * Fire it up!
-```
+```sh
 Vagrant up 
 ```
 * Make sure "out_Win10_eva.iso" had landed, give it a go with Virtualbox or the real box. 
