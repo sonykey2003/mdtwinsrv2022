@@ -22,7 +22,8 @@ Vagrant.configure("2") do |config|
     config.vm.synced_folder "./bin", "/bin", type: "smb", smb_username: "<your_mac_username>" #for the bin files
 
     config.vm.provision "shell", privileged: "true", path: "./scripts/prep-mdt.ps1"
-    config.vm.provision "shell", privileged: "true", path: "./scripts/config-mdt.ps1"
+    config.vm.provision "shell", privileged: "true", path: "./scripts/config-mdt.ps1",
+        run: "always"
 
     config.vm.provider :virtualbox do |v, override|     
         #v.gui = true
